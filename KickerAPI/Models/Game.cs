@@ -13,10 +13,10 @@ namespace KickerAPI.Models
         public DateTime Date { get; set; }
 
         //Relations
-        public Team TeamA { get; set; }
-        public int TeamAID { get; set; }
-        public Team TeamB { get; set; }
-        public int TeamBID { get; set; }
+        public Team? TeamA { get; set; }
+        public int? TeamAID { get; set; }
+        public Team? TeamB { get; set; }
+        public int? TeamBID { get; set; }
         public Table Table { get; set; }
         public int TableID { get; set; }
 

@@ -14,12 +14,28 @@ namespace KickerAPI.Data
 
             if (context.Users.Any())
             {
-                return;
+
+                //return;
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
             }
 
-            context.Users.AddRange(
-                new User { RoleID = 1, Username = "test", Password = "test", FirstName = "Test", LastName = "Test", Email = "test.test@thomasmore.be" }
-                );
+            var userRole = new Role { Name = "User" };
+            var adminRole = new Role { Name = "Admin" };
+            context.Roles.AddRange(
+              userRole, adminRole);
+            context.SaveChanges();
+
+            var user1 = new User { Role = adminRole, Username = "test", Password = "test", FirstName = "Test", LastName = "Test", Email = "test.test@thomasmore.be" };
+
+            context.Users.Add(user1);
+            context.SaveChanges();
+
+            var teamUsers = new List<TeamUser>();
+            var team1 = new Team { Captain = user1, CompanyName = "Washington Solutions", Location = "Nijlen", TeamName = "Washington Solutions", TeamUsers = teamUsers};
+            context.Teams.AddRange(team1);
+            team1.TeamUsers.Add(new TeamUser { Team = team1, User = user1 });
+
             context.SaveChanges();
         }
     }

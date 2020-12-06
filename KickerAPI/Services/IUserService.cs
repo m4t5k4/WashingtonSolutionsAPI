@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KickerAPI.Services
 {
-    interface IUserService
+    public interface IUserService
     {
         User Authenticate(string username, string password);
     }

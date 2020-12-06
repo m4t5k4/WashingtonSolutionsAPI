@@ -42,11 +42,12 @@ namespace KickerAPI.Data
             modelBuilder.Entity<TeamUser>()
                 .HasOne(tu => tu.Team)
                 .WithMany(tu => tu.TeamUsers)
-                .HasForeignKey(tu => tu.Team);
+                .HasForeignKey(tu => tu.TeamID);
             modelBuilder.Entity<TeamUser>()
                 .HasOne(tu => tu.User)
                 .WithMany(tu => tu.TeamUsers)
-                .HasForeignKey(tu => tu.UserID);
+                .HasForeignKey(tu => tu.UserID)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<TournamentGame>()
                 .HasKey(tg => new { tg.TournamentID, tg.GameID });
@@ -58,6 +59,8 @@ namespace KickerAPI.Data
                 .HasOne(tg => tg.Game)
                 .WithOne(tg => tg.TournamentGame)
                 .HasForeignKey<TournamentGame>(tg => tg.GameID);
+
+
         }
     }
 }
