@@ -40,7 +40,8 @@ namespace KickerAPI.Data
             modelBuilder.Entity<TeamUser>()
                 .HasOne(tu => tu.Team)
                 .WithMany(t => t.TeamUsers)
-                .HasForeignKey(tu => tu.TeamID);
+                .HasForeignKey(tu => tu.TeamID)
+                .OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<TeamUser>()
                 .HasOne(tu => tu.User)
                 .WithMany(u => u.TeamUsers)
