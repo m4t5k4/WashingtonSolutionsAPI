@@ -27,14 +27,15 @@ namespace KickerAPI.Data
             context.SaveChanges();
 
             var user1 = new User { Role = adminRole, Username = "test", Password = "test", FirstName = "Test", LastName = "Test", Email = "test.test@thomasmore.be" };
-
             context.Users.Add(user1);
             context.SaveChanges();
 
-
             var team1 = new Team { Captain = user1, CompanyName = "Washington Solutions", Location = "Nijlen", TeamName = "Washington Solutions"};
             context.Teams.AddRange(team1);
+            context.SaveChanges();
 
+            var teamUser1 = new TeamUser { Team = team1, User = user1 };
+            context.TeamUsers.Add(teamUser1);
             context.SaveChanges();
         }
     }

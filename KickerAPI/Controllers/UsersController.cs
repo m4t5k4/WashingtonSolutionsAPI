@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using KickerAPI.Data;
 using KickerAPI.Models;
 
-namespace KickerAPI.Data
+namespace KickerAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

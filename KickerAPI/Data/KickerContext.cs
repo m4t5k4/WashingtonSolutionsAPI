@@ -21,6 +21,7 @@ namespace KickerAPI.Data
         public DbSet<GameType> GameTypes { get; set; }
         public DbSet<Table> Table { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamUser> TeamUsers { get; set; }
 
         public DbSet<Tournament> Tournaments { get; set; }
 
@@ -34,6 +35,16 @@ namespace KickerAPI.Data
             modelBuilder.Entity<Team>().ToTable("Team");
             modelBuilder.Entity<Tournament>().ToTable("Tournament");
 
+            modelBuilder.Entity<TeamUser>()
+                .HasKey(tu => new { tu.TeamID, tu.UserID });
+            modelBuilder.Entity<TeamUser>()
+                .HasOne(tu => tu.Team)
+                .WithMany(t => t.TeamUsers)
+                .HasForeignKey(tu => tu.TeamID);
+            modelBuilder.Entity<TeamUser>()
+                .HasOne(tu => tu.User)
+                .WithMany(u => u.TeamUsers)
+                .HasForeignKey(tu => tu.UserID);
         }
     }
 }
