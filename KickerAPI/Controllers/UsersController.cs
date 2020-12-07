@@ -19,10 +19,11 @@ namespace KickerAPI.Controllers
         private IUserService _userService;
         private readonly KickerContext _context;
 
-        public UsersController(KickerContext context)
-        {
+        public UsersController(IUserService userService, KickerContext context) { 
+            _userService = userService;
             _context = context;
         }
+
 
         [Authorize]
         [HttpGet]
