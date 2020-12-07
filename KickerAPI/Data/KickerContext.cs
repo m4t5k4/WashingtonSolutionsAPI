@@ -21,9 +21,8 @@ namespace KickerAPI.Data
         public DbSet<GameType> GameTypes { get; set; }
         public DbSet<Table> Table { get; set; }
         public DbSet<Team> Teams { get; set; }
-        public DbSet<TeamUser> TeamUsers { get; set; }
+
         public DbSet<Tournament> Tournaments { get; set; }
-        public DbSet<TournamentGame> TournamentGames { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,33 +32,7 @@ namespace KickerAPI.Data
             modelBuilder.Entity<GameType>().ToTable("GameType");
             modelBuilder.Entity<Table>().ToTable("Table");
             modelBuilder.Entity<Team>().ToTable("Team");
-            modelBuilder.Entity<TeamUser>().ToTable("TeamUser");
             modelBuilder.Entity<Tournament>().ToTable("Tournament");
-            modelBuilder.Entity<TournamentGame>().ToTable("TournamentGames");
-
-            modelBuilder.Entity<TeamUser>()
-                .HasKey(tu => new { tu.TeamID, tu.UserID });
-            modelBuilder.Entity<TeamUser>()
-                .HasOne(tu => tu.Team)
-                .WithMany(tu => tu.TeamUsers)
-                .HasForeignKey(tu => tu.TeamID);
-            modelBuilder.Entity<TeamUser>()
-                .HasOne(tu => tu.User)
-                .WithMany(tu => tu.TeamUsers)
-                .HasForeignKey(tu => tu.UserID)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<TournamentGame>()
-                .HasKey(tg => new { tg.TournamentID, tg.GameID });
-            modelBuilder.Entity<TournamentGame>()
-                .HasOne(tg => tg.Tournament)
-                .WithMany(tg => tg.TournamentGames)
-                .HasForeignKey(tg => tg.TournamentID);
-            modelBuilder.Entity<TournamentGame>()
-                .HasOne(tg => tg.Game)
-                .WithOne(tg => tg.TournamentGame)
-                .HasForeignKey<TournamentGame>(tg => tg.GameID);
-
 
         }
     }

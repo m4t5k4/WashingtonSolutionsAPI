@@ -5,33 +5,29 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using KickerAPI.Data;
 using KickerAPI.Models;
-using KickerAPI.Services;
 
-namespace KickerAPI.Controllers
+namespace KickerAPI.Data
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        private IUserService _userService;
         private readonly KickerContext _context;
 
-        public UserController(KickerContext context, IUserService userService)
+        public UsersController(KickerContext context)
         {
-            _userService = userService;
             _context = context;
         }
 
-        // GET: api/User
+        // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return await _context.Users.ToListAsync();
         }
 
-        // GET: api/User/5
+        // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -45,7 +41,7 @@ namespace KickerAPI.Controllers
             return user;
         }
 
-        // PUT: api/User/5
+        // PUT: api/Users/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -77,7 +73,7 @@ namespace KickerAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/User
+        // POST: api/Users
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -89,18 +85,7 @@ namespace KickerAPI.Controllers
             return CreatedAtAction("GetUser", new { id = user.UserID }, user);
         }
 
-        [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]User userParam)
-        {
-            var user = _userService.Authenticate(userParam.Username, userParam.Password);
-
-            if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
-
-            return Ok(user);
-        }
-
-        // DELETE: api/User/5
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {

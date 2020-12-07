@@ -12,23 +12,23 @@ namespace KickerAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TeamController : ControllerBase
+    public class TeamsController : ControllerBase
     {
         private readonly KickerContext _context;
 
-        public TeamController(KickerContext context)
+        public TeamsController(KickerContext context)
         {
             _context = context;
         }
 
-        // GET: api/Team
+        // GET: api/Teams
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Team>>> GetTeams()
         {
             return await _context.Teams.ToListAsync();
         }
 
-        // GET: api/Team/5
+        // GET: api/Teams/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Team>> GetTeam(int id)
         {
@@ -42,7 +42,7 @@ namespace KickerAPI.Controllers
             return team;
         }
 
-        // PUT: api/Team/5
+        // PUT: api/Teams/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -74,7 +74,7 @@ namespace KickerAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Team
+        // POST: api/Teams
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -86,7 +86,7 @@ namespace KickerAPI.Controllers
             return CreatedAtAction("GetTeam", new { id = team.TeamID }, team);
         }
 
-        // DELETE: api/Team/5
+        // DELETE: api/Teams/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Team>> DeleteTeam(int id)
         {

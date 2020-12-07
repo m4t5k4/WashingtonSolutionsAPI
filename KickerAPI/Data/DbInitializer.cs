@@ -31,10 +31,9 @@ namespace KickerAPI.Data
             context.Users.Add(user1);
             context.SaveChanges();
 
-            var teamUsers = new List<TeamUser>();
-            var team1 = new Team { Captain = user1, CompanyName = "Washington Solutions", Location = "Nijlen", TeamName = "Washington Solutions", TeamUsers = teamUsers};
+
+            var team1 = new Team { Captain = user1, CompanyName = "Washington Solutions", Location = "Nijlen", TeamName = "Washington Solutions"};
             context.Teams.AddRange(team1);
-            team1.TeamUsers.Add(new TeamUser { Team = team1, User = user1 });
 
             context.SaveChanges();
         }

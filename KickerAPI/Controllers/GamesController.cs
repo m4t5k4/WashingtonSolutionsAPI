@@ -12,23 +12,23 @@ namespace KickerAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GameController : ControllerBase
+    public class GamesController : ControllerBase
     {
         private readonly KickerContext _context;
 
-        public GameController(KickerContext context)
+        public GamesController(KickerContext context)
         {
             _context = context;
         }
 
-        // GET: api/Game
+        // GET: api/Games
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Game>>> GetGames()
         {
             return await _context.Games.ToListAsync();
         }
 
-        // GET: api/Game/5
+        // GET: api/Games/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Game>> GetGame(int id)
         {
@@ -42,7 +42,7 @@ namespace KickerAPI.Controllers
             return game;
         }
 
-        // PUT: api/Game/5
+        // PUT: api/Games/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
@@ -74,7 +74,7 @@ namespace KickerAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Game
+        // POST: api/Games
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -86,7 +86,7 @@ namespace KickerAPI.Controllers
             return CreatedAtAction("GetGame", new { id = game.GameID }, game);
         }
 
-        // DELETE: api/Game/5
+        // DELETE: api/Games/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Game>> DeleteGame(int id)
         {

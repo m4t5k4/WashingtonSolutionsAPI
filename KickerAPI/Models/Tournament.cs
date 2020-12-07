@@ -13,7 +13,7 @@ namespace KickerAPI.Models
         public DateTime EndDate { get; set; }
 
         //Relations
-        public ICollection<TournamentGame> TournamentGames { get; set; }
+        public ICollection<Game> Games { get; set; }
 
     }
 }
