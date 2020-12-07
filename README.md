@@ -1,4 +1,4 @@
-# Washington Solutions
+# Washington Solutions API
 ## Application Challenge Angular
 ### Teamleden
     Bram Vermeulen
