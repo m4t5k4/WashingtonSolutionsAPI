@@ -24,6 +24,7 @@ namespace KickerAPI.Data
         public DbSet<TeamUser> TeamUsers { get; set; }
 
         public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<File> Files { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

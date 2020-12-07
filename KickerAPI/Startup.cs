@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using KickerAPI.Data;
 using KickerAPI.Helpers;
 using KickerAPI.Services;
-using KickerAPI.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -134,6 +129,10 @@ namespace KickerAPI
             }
             app.UseCors("MyPolicy");
             app.UseHttpsRedirection();
+
+            //static files
+            app.UseStaticFiles();
+            app.UseDirectoryBrowser();
 
             app.UseRouting();
 
