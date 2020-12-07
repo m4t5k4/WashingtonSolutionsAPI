@@ -21,7 +21,9 @@ namespace KickerAPI.Data
         public DbSet<GameType> GameTypes { get; set; }
         public DbSet<Table> Table { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Group> Groups { get; set; }
         public DbSet<TeamUser> TeamUsers { get; set; }
+        public DbSet<Competition> Competitions { get; set; }
 
         public DbSet<Tournament> Tournaments { get; set; }
         public DbSet<File> Files { get; set; }
@@ -33,8 +35,10 @@ namespace KickerAPI.Data
             modelBuilder.Entity<Game>().ToTable("Game");
             modelBuilder.Entity<GameType>().ToTable("GameType");
             modelBuilder.Entity<Table>().ToTable("Table");
+            modelBuilder.Entity<Group>().ToTable("Group");
             modelBuilder.Entity<Team>().ToTable("Team");
             modelBuilder.Entity<Tournament>().ToTable("Tournament");
+            modelBuilder.Entity<Competition>().ToTable("Competition");
 
             modelBuilder.Entity<TeamUser>()
                 .HasKey(tu => new { tu.TeamID, tu.UserID });

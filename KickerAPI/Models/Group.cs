@@ -8,6 +8,7 @@ namespace KickerAPI.Models
     public class Group
     {
         public int GroupID { get; set; }
+        public string Name { get; set; }
         public string CompanyName { get; set; }
         public string Location { get; set; }
 
