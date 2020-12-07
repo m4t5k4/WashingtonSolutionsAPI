@@ -20,7 +20,5 @@ namespace KickerAPI.Models
         public Table Table { get; set; }
         public int TableID { get; set; }
 
-        public TournamentGame TournamentGame { get; set; }
-
     }
 }

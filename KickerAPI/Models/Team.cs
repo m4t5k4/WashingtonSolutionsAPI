@@ -14,7 +14,7 @@ namespace KickerAPI.Models
 
         //Relations
         public User Captain { get; set; }
-        public int CaptainUserID { get; set; }
-        public ICollection<TeamUser> TeamUsers { get; set; }
+        public int CaptainID { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }

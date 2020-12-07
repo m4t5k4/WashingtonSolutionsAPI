@@ -10,9 +10,5 @@ namespace KickerAPI.Models
     {
         public int RoleID { get; set; }
         public string Name { get; set; }
-
-        //Relations
-        [JsonIgnore]
-        public ICollection<User> Users { get; set; }
     }
 }
