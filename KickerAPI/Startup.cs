@@ -1,35 +1,43 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KickerAPI.Data;
-using KickerAPI.Helpers;
-using KickerAPI.Services;
-using KickerAPI.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-
 namespace KickerAPI
 {
+    using KickerAPI.Data;
+    using KickerAPI.Helpers;
+    using KickerAPI.Services;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http.Features;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.IdentityModel.Tokens;
+    using Microsoft.OpenApi.Models;
+    using System.Text;
+
+    /// <summary>
+    /// Defines the <see cref="Startup" />.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration<see cref="IConfiguration"/>.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Gets the Configuration.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// The ConfigureServices.
+        /// </summary>
+        /// <param name="services">The services<see cref="IServiceCollection"/>.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
@@ -51,33 +59,10 @@ namespace KickerAPI
             services.AddControllers();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(swagger =>
+            services.AddSwaggerGen(c =>
             {
                 // To Enable authorization using Swagger (JWT)  
-                swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
-                {
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer",
-                    BearerFormat = "JWT",
-                    In = ParameterLocation.Header,
-                    Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
-                });
-                swagger.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                          new OpenApiSecurityScheme
-                            {
-                                Reference = new OpenApiReference
-                                {
-                                    Type = ReferenceType.SecurityScheme,
-                                    Id = "Bearer"
-                                }
-                            },
-                            new string[] {}
-
-                    }
-                });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() { Name = "Authorization", Type = SecuritySchemeType.ApiKey, Scheme = "Bearer", BearerFormat = "JWT", In = ParameterLocation.Header, Description = "JWT Authorizationheader usingtheBearerscheme. \r\n\r\n Enter 'Bearer' [space] andthenyourtoken in the textinput below.\r\n\r\nExample: \"Bearer12345abcdef\"", }); c.AddSecurityRequirement(new OpenApiSecurityRequirement { { new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" } }, new string[] { } } });
             });
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
@@ -111,11 +96,14 @@ namespace KickerAPI
             services.AddDbContext<KickerContext>(opt =>
                 opt.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-
         }
-    
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// The Configure.
+        /// </summary>
+        /// <param name="app">The app<see cref="IApplicationBuilder"/>.</param>
+        /// <param name="env">The env<see cref="IWebHostEnvironment"/>.</param>
+        /// <param name="context">The context<see cref="KickerContext"/>.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, KickerContext context)
         {
             // Enable middleware to serve generated Swagger as a JSON endpoint.
@@ -132,10 +120,13 @@ namespace KickerAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseRouting();
+
             app.UseCors("MyPolicy");
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
