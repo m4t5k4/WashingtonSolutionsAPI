@@ -32,12 +32,16 @@ namespace KickerAPI.Data
               userRole, adminRole, captainRole);
             context.SaveChanges();
 
-            var group1 = new Group { Name = "Thomas More Kicker Team", CompanyName = "Thomas More", Location = "Geel" };
-            var group2 = new Group { Name = "UCLL Kicker Team", CompanyName = "UCLL", Location = "Hasselt" };
+            var pic1 = new File { Name = "Morty Smith", Path = "Morty_Smith.jpg" };
+            context.Files.Add(pic1);
+            context.SaveChanges();
+
+            var group1 = new Group { Name = "Thomas More Kicker Team", CompanyName = "Thomas More", Location = "Geel", TeamPicture = pic1 };
+            var group2 = new Group { Name = "UCLL Kicker Team", CompanyName = "UCLL", Location = "Hasselt", TeamPicture = pic1 };
             context.Groups.AddRange(group1, group2);
             context.SaveChanges();
 
-            var user1 = new User { Role = adminRole, Username = "admin", Password = "admin123", FirstName = "admin", LastName = "Istrator", Email = "admin.istrator@thomasmore.be" };
+            var user1 = new User { Role = adminRole, Username = "admin", Password = "admin123", FirstName = "admin", LastName = "Istrator", Email = "admin.istrator@thomasmore.be", Group = group1 };
             var user2 = new User { Role = userRole, Username = "user1", Password = "user123", FirstName = "User1", LastName = "Test", Email = "user1.test@thomasmore.be", Group = group1 };
             var user3 = new User { Role = userRole, Username = "user2", Password = "user123", FirstName = "User2", LastName = "Test", Email = "user2.test@thomasmore.be", Group = group2 };
             var user4 = new User { Role = captainRole, Username = "captain1", Password = "captain123", FirstName = "captain1", LastName = "Test", Email = "captain1.test@thomasmore.be", Group = group1 };
@@ -57,8 +61,8 @@ namespace KickerAPI.Data
             context.TeamUsers.AddRange(teamUser1, teamUser2, teamUser3, teamUser4);
             context.SaveChanges();
 
-            var table1 = new Table { TableName = "TM Table 1", CompanyName = "Thomas More", ContactPerson = user1 };
-            var table2 = new Table { TableName = "UCLL Table 1", CompanyName = "UCLL", ContactPerson = user1 };
+            var table1 = new Table { TableName = "TM Table 1", CompanyName = "Thomas More", ContactPerson = user1, Address = "Geel", TablePicture = pic1 };
+            var table2 = new Table { TableName = "UCLL Table 1", CompanyName = "UCLL", ContactPerson = user1, Address = "Hasselt", TablePicture = pic1 };
             context.Table.AddRange(table1, table2);
             context.SaveChanges();
 

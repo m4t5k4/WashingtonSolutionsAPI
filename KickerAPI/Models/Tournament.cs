@@ -15,8 +15,8 @@ namespace KickerAPI.Models
         //Relations
         public Competition Competition { get; set; }
         public int CompetitionID { get; set; }
-        public Group Winner { get; set; }
-        public int WinnerID { get; set; }
+        public Group? Winner { get; set; }
+        public int? WinnerID { get; set; }
 
     }
 }

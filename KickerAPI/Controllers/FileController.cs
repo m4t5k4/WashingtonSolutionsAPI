@@ -16,10 +16,10 @@ namespace KickerAPI.Controllers
     [ApiController]
     public class FileController : ControllerBase
     {
-        private IHostingEnvironment _hostingEnvironment;
+        private IWebHostEnvironment _hostingEnvironment;
         private readonly KickerContext _context;
 
-        public FileController(IHostingEnvironment environment, KickerContext context)
+        public FileController(IWebHostEnvironment environment, KickerContext context)
         {
             _hostingEnvironment = environment;
             _context = context;

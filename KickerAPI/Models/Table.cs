@@ -9,7 +9,7 @@ namespace KickerAPI.Models
     {
         public int TableID { get; set; }
         public string TableName { get; set; }
-        public string? CompanyName { get; set; }
+        public string CompanyName { get; set; }
         public string Address { get; set; }
 
         //Relations
