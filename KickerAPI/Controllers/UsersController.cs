@@ -19,8 +19,9 @@ namespace KickerAPI.Controllers
         private IUserService _userService;
         private readonly KickerContext _context;
 
-        public UsersController(IUserService userService) { 
-            _userService = userService; 
+        public UsersController(IUserService userService, KickerContext context) { 
+            _userService = userService;
+            _context = context;
         }
 
 
