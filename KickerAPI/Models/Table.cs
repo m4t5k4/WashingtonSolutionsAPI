@@ -15,6 +15,8 @@ namespace KickerAPI.Models
         //Relations
         public User ContactPerson { get; set; }
         public int ContactPersonID { get; set; }
+        public File TablePicture { get; set; }
+        public int TablePictureID { get; set; }
 
     }
 }
