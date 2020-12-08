@@ -53,14 +53,17 @@ namespace KickerAPI.Data
                 .HasOne(tu => tu.User)
                 .WithMany(u => u.TeamUsers)
                 .HasForeignKey(tu => tu.UserID);
+
             modelBuilder.Entity<Tournament>()
                 .HasOne(t => t.Winner)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<Table>()
                 .HasOne(t => t.TablePicture)
                 .WithMany()
                 .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Entity<Game>()
                 .HasOne(g => g.Tournament)
                 .WithMany()
