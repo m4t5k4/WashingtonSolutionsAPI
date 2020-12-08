@@ -21,8 +21,8 @@ namespace KickerAPI.Models
         //Relations
         public int RoleID { get; set; }
         public Role Role { get; set; }
-        public ICollection<TeamUser> TeamUsers { get; set; }
-        public Group Group { get; set; }
-        public int GroupID { get; set; }
+        public ICollection<TeamUser>? TeamUsers { get; set; }
+        public Group? Group { get; set; }
+        public int? GroupID { get; set; }
     }
 }

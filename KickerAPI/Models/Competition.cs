@@ -11,8 +11,8 @@ namespace KickerAPI.Models
         public string Name { get; set; }
         
         //Relations
-        public GameType GameType { get; set; }
-        public int GameTypeID { get; set; }
+        public GameType? GameType { get; set; }
+        public int? GameTypeID { get; set; }
         public Group? Winner { get; set; }
         public int? WinnerID { get; set; }
     }

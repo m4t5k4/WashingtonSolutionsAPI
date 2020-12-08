@@ -8,21 +8,21 @@ namespace KickerAPI.Models
     public class Game
     {
         public int GameID { get; set; }
-        public int ScoreTeamA { get; set; }
-        public int ScoreTeamB { get; set; }
+        public int? ScoreTeamA { get; set; }
+        public int? ScoreTeamB { get; set; }
         public DateTime Date { get; set; }
 
         //Relations
-        public Team TeamA { get; set; }
+        public Team? TeamA { get; set; }
         public int? TeamAID { get; set; }
-        public Team TeamB { get; set; }
+        public Team? TeamB { get; set; }
         public int? TeamBID { get; set; }
-        public Table Table { get; set; }
-        public int TableID { get; set; }
-        public GameType GameType { get; set; }
-        public int GameTypeID { get; set; }
-        public Tournament Tournament { get; set; }
-        public int TournamentID { get; set; }
+        public Table? Table { get; set; }
+        public int? TableID { get; set; }
+        public GameType? GameType { get; set; }
+        public int? GameTypeID { get; set; }
+        public Tournament? Tournament { get; set; }
+        public int? TournamentID { get; set; }
 
     }
 }

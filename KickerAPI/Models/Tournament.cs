@@ -13,8 +13,8 @@ namespace KickerAPI.Models
         public DateTime EndDate { get; set; }
 
         //Relations
-        public Competition Competition { get; set; }
-        public int CompetitionID { get; set; }
+        public Competition? Competition { get; set; }
+        public int? CompetitionID { get; set; }
         public Group? Winner { get; set; }
         public int? WinnerID { get; set; }
 

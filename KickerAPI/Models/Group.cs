@@ -13,7 +13,7 @@ namespace KickerAPI.Models
         public string Location { get; set; }
 
         //Relations
-        public File TeamPicture { get; set; }
-        public int TeamPictureID { get; set; }
+        public File? TeamPicture { get; set; }
+        public int? TeamPictureID { get; set; }
     }
 }
