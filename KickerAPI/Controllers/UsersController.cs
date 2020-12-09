@@ -49,7 +49,7 @@ namespace KickerAPI.Controllers
         public IActionResult Authenticate([FromBody] User userParam)
         {
             //var user = _userService.Authenticate(userParam.Username, userParam.Password);
-            var user = _context.Users.SingleOrDefault(x => x.Email == userParam.Username);
+            var user = _context.Users.SingleOrDefault(x => x.Username == userParam.Username);
 
             if (user == null || !BC.Verify(userParam.Password, user.Password))
                 return BadRequest(new { message = "Username or password is incorrect" });
