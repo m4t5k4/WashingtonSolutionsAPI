@@ -11,6 +11,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using BC = BCrypt.Net.BCrypt;
 
 namespace KickerAPI.Services
 {
@@ -27,10 +28,10 @@ namespace KickerAPI.Services
 
         public User Authenticate(string username, string password)
         {
-            var user = _context.Users.Include(r => r.Role).SingleOrDefault(x => x.Username == username && x.Password == password);
+            var user = _context.Users.Include(r => r.Role).SingleOrDefault(x => x.Username == username);
 
             // return null if user not found
-            if (user == null)
+            if (user == null || !BC.Verify(password, user.Password))
                 return null;
 
             // authentication successful so generate jwt token
