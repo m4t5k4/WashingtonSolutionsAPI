@@ -8,6 +8,7 @@ using KickerAPI.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using File = KickerAPI.Models.File;
 
 namespace KickerAPI.Controllers
@@ -23,6 +24,27 @@ namespace KickerAPI.Controllers
         {
             _hostingEnvironment = environment;
             _context = context;
+        }
+
+        // GET: api/Files
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<File>>> GetFiles()
+        {
+            return await _context.Files.ToListAsync();
+        }
+
+        // GET: api/Files/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<File>> GetFile(int id)
+        {
+            var file = await _context.Files.FindAsync(id);
+
+            if (file == null)
+            {
+                return NotFound();
+            }
+
+            return file;
         }
 
         [HttpPost]
