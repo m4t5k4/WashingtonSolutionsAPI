@@ -9,6 +9,7 @@ using KickerAPI.Data;
 using KickerAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using KickerAPI.Services;
+using BC = BCrypt.Net.BCrypt;
 
 namespace KickerAPI.Controllers
 {
@@ -36,6 +37,8 @@ namespace KickerAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            user.Password = BC.HashPassword(user.Password);
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
@@ -45,9 +48,10 @@ namespace KickerAPI.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] User userParam)
         {
-            var user = _userService.Authenticate(userParam.Username, userParam.Password);
+            //var user = _userService.Authenticate(userParam.Username, userParam.Password);
+            var user = _context.Users.SingleOrDefault(x => x.Email == userParam.Username);
 
-            if (user == null)
+            if (user == null || !BC.Verify(userParam.Password, user.Password))
                 return BadRequest(new { message = "Username or password is incorrect" });
 
             return Ok(user);
