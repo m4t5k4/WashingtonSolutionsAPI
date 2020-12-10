@@ -25,13 +25,28 @@ namespace KickerAPI.Controllers
             _context = context;
         }
 
-
+        // GET: api/Users
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             var username = User.Claims.FirstOrDefault(c => c.Type == "Username").Value;
             return await _context.Users.ToListAsync();
+        }
+
+        // GET: api/Users/5
+        [Authorize]
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
         }
 
         [HttpPost]
@@ -45,6 +60,7 @@ namespace KickerAPI.Controllers
             return Ok(user);
         }
 
+        // POST: api/Users/authenticate
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] User userParam)
         {
@@ -56,6 +72,7 @@ namespace KickerAPI.Controllers
             return Ok(user);
         }
 
+        // DELETE: api/Users/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {
