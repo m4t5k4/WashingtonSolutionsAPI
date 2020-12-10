@@ -37,16 +37,16 @@ namespace KickerAPI.Data
             context.Files.Add(pic1);
             context.SaveChanges();
 
-            var group1 = new Group { Name = "Thomas More Kicker Team", CompanyName = "Thomas More", Location = "Geel", TeamPicture = pic1 };
-            var group2 = new Group { Name = "UCLL Kicker Team", CompanyName = "UCLL", Location = "Hasselt", TeamPicture = pic1 };
+            var group1 = new Group { Name = "Thomas More Kicker Team", CompanyName = "Thomas More", Location = "Geel", GroupPicture = pic1 };
+            var group2 = new Group { Name = "UCLL Kicker Team", CompanyName = "UCLL", Location = "Hasselt", GroupPicture = pic1 };
             context.Groups.AddRange(group1, group2);
             context.SaveChanges();
 
-            var user1 = new User { Role = adminRole, Username = "admin", Password = BC.HashPassword("admin123"), FirstName = "admin", LastName = "Istrator", Email = "admin.istrator@thomasmore.be", Group = group1 };
-            var user2 = new User { Role = userRole, Username = "user1", Password = BC.HashPassword("user123"), FirstName = "User1", LastName = "Test", Email = "user1.test@thomasmore.be", Group = group1 };
-            var user3 = new User { Role = userRole, Username = "user2", Password = BC.HashPassword("user123"), FirstName = "User2", LastName = "Test", Email = "user2.test@thomasmore.be", Group = group2 };
-            var user4 = new User { Role = captainRole, Username = "captain1", Password = BC.HashPassword("captian123"), FirstName = "captain1", LastName = "Test", Email = "captain1.test@thomasmore.be", Group = group1 };
-            var user5 = new User { Role = captainRole, Username = "captain2", Password = BC.HashPassword("captian123"), FirstName = "captain2", LastName = "Test", Email = "captain2.test@thomasmore.be", Group = group2 };
+            var user1 = new User { Role = adminRole, Username = "admin", Password = BC.HashPassword("admin123"), FirstName = "admin", LastName = "Istrator", Email = "admin.istrator@thomasmore.be", Group = group1, UserPicture = pic1 };
+            var user2 = new User { Role = userRole, Username = "user1", Password = BC.HashPassword("user123"), FirstName = "User1", LastName = "Test", Email = "user1.test@thomasmore.be", Group = group1, UserPicture = pic1 };
+            var user3 = new User { Role = userRole, Username = "user2", Password = BC.HashPassword("user123"), FirstName = "User2", LastName = "Test", Email = "user2.test@thomasmore.be", Group = group2, UserPicture = pic1 };
+            var user4 = new User { Role = captainRole, Username = "captain1", Password = BC.HashPassword("captian123"), FirstName = "captain1", LastName = "Test", Email = "captain1.test@thomasmore.be", Group = group1, UserPicture = pic1 };
+            var user5 = new User { Role = captainRole, Username = "captain2", Password = BC.HashPassword("captian123"), FirstName = "captain2", LastName = "Test", Email = "captain2.test@thomasmore.be", Group = group2, UserPicture = pic1 };
             context.Users.AddRange(user1, user2, user3, user4, user5);
             context.SaveChanges();
 

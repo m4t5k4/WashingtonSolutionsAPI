@@ -24,5 +24,7 @@ namespace KickerAPI.Models
         public ICollection<TeamUser>? TeamUsers { get; set; }
         public Group? Group { get; set; }
         public int? GroupID { get; set; }
+        public File? UserPicture { get; set; }
+        public int? UserPictureID { get; set; }
     }
 }
