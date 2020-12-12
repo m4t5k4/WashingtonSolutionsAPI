@@ -42,6 +42,34 @@ namespace KickerAPI.Controllers
             return game;
         }
 
+        [HttpGet("GetByTournament/{id}")]
+        public async Task<ActionResult<IEnumerable<Game>>> GetByTournament(int id)
+        {
+            var games = await _context.Games.Where(g => g.TournamentID == id).ToListAsync();
+
+            if (games == null)
+            {
+                return NotFound();
+            }
+
+            return games;
+        }
+
+        [HttpGet("GetByTeam/{id}")]
+        public async Task<ActionResult<IEnumerable<Game>>> GetByTeam(int id)
+        {
+            var games = await _context.Games.Where(g => g.TeamAID == id).ToListAsync();
+            var gamesB = await _context.Games.Where(g => g.TeamBID == id).ToListAsync();
+            games.AddRange(gamesB);
+
+            if (games == null)
+            {
+                return NotFound();
+            }
+
+            return games;
+        }
+
         // PUT: api/Games/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

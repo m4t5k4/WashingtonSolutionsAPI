@@ -10,6 +10,7 @@ using KickerAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using KickerAPI.Services;
 using BC = BCrypt.Net.BCrypt;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace KickerAPI.Controllers
 {
@@ -101,6 +102,20 @@ namespace KickerAPI.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult Patch(int id, [FromBody] JsonPatchDocument<User> patchDocument)
+        {
+            var entity = _context.Users.FirstOrDefault(user => user.UserID == id);
+
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            patchDocument.ApplyTo(entity);
+            return Ok(entity);
         }
 
         // DELETE: api/Users/{id}
