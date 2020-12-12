@@ -25,14 +25,14 @@ namespace KickerAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Team>>> GetTeams()
         {
-            return await _context.Teams.ToListAsync();
+            return await _context.Teams.Include(t => t.TeamUsers).ToListAsync();
         }
 
         // GET: api/Teams/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Team>> GetTeam(int id)
         {
-            var team = await _context.Teams.FindAsync(id);
+            var team = await _context.Teams.Include(t => t.TeamUsers).FirstOrDefaultAsync(t => t.TeamID == id);
 
             if (team == null)
             {

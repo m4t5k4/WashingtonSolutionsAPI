@@ -13,6 +13,6 @@ namespace KickerAPI.Models
         //Relations
         public Group Group { get; set; }
         public int GroupID { get; set; }
-        public ICollection<TeamUser>? TeamUsers { get; set; }
+        public virtual ICollection<TeamUser>? TeamUsers { get; set; }
     }
 }

@@ -31,8 +31,8 @@ namespace KickerAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            var username = User.Claims.FirstOrDefault(c => c.Type == "Username").Value;
-            return await _context.Users.ToListAsync();
+            //var username = User.Claims.FirstOrDefault(c => c.Type == "Username").Value;
+            return await _context.Users.Include(u => u.TeamUsers).ToListAsync();
         }
 
         // GET: api/Users/5
@@ -40,7 +40,7 @@ namespace KickerAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.Include(u => u.TeamUsers).FirstOrDefaultAsync(u => u.UserID == id);
 
             if (user == null)
             {
@@ -95,6 +95,7 @@ namespace KickerAPI.Controllers
                 return BadRequest();
             }
 
+            user.Password = BC.HashPassword(user.Password);
             _context.Entry(user).State = EntityState.Modified;
 
             try
@@ -131,6 +132,7 @@ namespace KickerAPI.Controllers
         }
 
         // DELETE: api/Users/{id}
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
         {

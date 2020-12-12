@@ -71,6 +71,18 @@ namespace KickerAPI.Data
             context.TeamUsers.AddRange(teamUser1, teamUser2, teamUser3, teamUser4);
             context.SaveChanges();
 
+            team1.TeamUsers.Add(teamUser1);
+            team1.TeamUsers.Add(teamUser1);
+            team2.TeamUsers.Add(teamUser3);
+            team2.TeamUsers.Add(teamUser4);
+            context.SaveChanges();
+
+            user2.TeamUsers.Add(teamUser1);
+            user3.TeamUsers.Add(teamUser3);
+            user4.TeamUsers.Add(teamUser2);
+            user5.TeamUsers.Add(teamUser4);
+            context.SaveChanges();
+
             var table1 = new Table { TableName = "TM Table 1", CompanyName = "Thomas More", ContactPerson = user1, Address = "Geel", TablePicture = pic1 };
             var table2 = new Table { TableName = "UCLL Table 1", CompanyName = "UCLL", ContactPerson = user1, Address = "Hasselt", TablePicture = pic1 };
             context.Table.AddRange(table1, table2);
