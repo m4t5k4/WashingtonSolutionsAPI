@@ -26,6 +26,15 @@ namespace KickerAPI.Data
             context.GameTypes.AddRange(gameType1, gameType2);
             context.SaveChanges();
 
+            var gameStatus1 = new GameStatus { Name = "Challenged" };
+            var gameStatus2 = new GameStatus { Name = "Planned" };
+            var gameStatus3 = new GameStatus { Name = "Playing" };
+            var gameStatus4 = new GameStatus { Name = "Played" };
+            var gameStatus5 = new GameStatus { Name = "Dispute" };
+            var gameStatus6 = new GameStatus { Name = "Declined" };
+            context.GameStatus.AddRange(gameStatus1, gameStatus2, gameStatus3, gameStatus4, gameStatus5, gameStatus6);
+            context.SaveChanges();
+
             var userRole = new Role { Name = "User" };
             var adminRole = new Role { Name = "Admin" };
             var captainRole = new Role { Name = "Captain" };
@@ -75,8 +84,9 @@ namespace KickerAPI.Data
             context.Tournaments.Add(tournament1);
             context.SaveChanges();
 
-            var game1 = new Game { TeamA = team1, TeamB = team2, Table = table1, GameType = gameType1, Tournament = tournament1 };
-            context.Games.Add(game1);
+            var game1 = new Game { TeamA = team1, TeamB = team2, Table = table1, GameType = gameType1, Tournament = tournament1, ChallengedBy = group1, ChallengedGroup = group2, GameStatus = gameStatus2 };
+            var game2 = new Game { TeamA = team2, TeamB = team1, Table = table1, GameType = gameType2, Tournament = tournament1, ScoreTeamA = 1, ScoreTeamB = 2, ChallengedBy = group2, ChallengedGroup = group1, GameStatus = gameStatus5 };
+            context.Games.AddRange(game1, game2);
             context.SaveChanges();
 
             

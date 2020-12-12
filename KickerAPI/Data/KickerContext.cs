@@ -19,6 +19,7 @@ namespace KickerAPI.Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<GameType> GameTypes { get; set; }
+        public DbSet<GameStatus> GameStatus { get; set; }
         public DbSet<Table> Table { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<File> Files { get; set; }
@@ -40,6 +41,7 @@ namespace KickerAPI.Data
             modelBuilder.Entity<Tournament>().ToTable("Tournament");
             modelBuilder.Entity<Competition>().ToTable("Competition");
             modelBuilder.Entity<File>().ToTable("File");
+            modelBuilder.Entity<GameStatus>().ToTable("GameStatus");
 
 
             modelBuilder.Entity<TeamUser>()
