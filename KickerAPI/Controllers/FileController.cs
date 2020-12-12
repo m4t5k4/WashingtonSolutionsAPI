@@ -49,7 +49,7 @@ namespace KickerAPI.Controllers
 
         [HttpPost]
         [Route("upload")]
-        public async Task<IActionResult> Upload(IFormFile file)
+        public async Task<ActionResult<File>> Upload(IFormFile file)
         {
             var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
             if (!Directory.Exists(uploads))
@@ -68,8 +68,8 @@ namespace KickerAPI.Controllers
             var fileModel = new File { Name = file.FileName, Path = "uploads/" + file.FileName };
             _context.Files.Add(fileModel);
             await _context.SaveChangesAsync();
-            
-            return Ok(fileModel.Path);
+
+            return fileModel;
         }
     }
 }
