@@ -32,7 +32,8 @@ namespace KickerAPI.Data
             var gameStatus4 = new GameStatus { Name = "Played" };
             var gameStatus5 = new GameStatus { Name = "Dispute" };
             var gameStatus6 = new GameStatus { Name = "Declined" };
-            context.GameStatus.AddRange(gameStatus1, gameStatus2, gameStatus3, gameStatus4, gameStatus5, gameStatus6);
+            var gameStatus7 = new GameStatus { Name = "Verify" };
+            context.GameStatus.AddRange(gameStatus1, gameStatus2, gameStatus3, gameStatus4, gameStatus5, gameStatus6, gameStatus7);
             context.SaveChanges();
 
             var userRole = new Role { Name = "User" };

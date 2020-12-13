@@ -23,9 +23,9 @@ namespace KickerAPI.Models
         public int? GameTypeID { get; set; }
         public Tournament? Tournament { get; set; }
         public int? TournamentID { get; set; }
-        public Group? ChallengedGroup { get; set; }
+        public Team? ChallengedGroup { get; set; }
         public int? ChallengedGroupID { get; set; }
-        public Group? ChallengedBy { get; set; }
+        public Team? ChallengedBy { get; set; }
         public int? ChallengedByID { get; set; }
         public GameStatus? GameStatus { get; set; }
         public int? GameStatusID { get; set; }
