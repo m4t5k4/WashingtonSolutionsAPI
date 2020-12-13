@@ -118,7 +118,7 @@ namespace KickerAPI.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IActionResult Patch(int id, [FromBody] JsonPatchDocument<User> patchDocument)
+        public async Task<ActionResult<User>> Patch(int id, [FromBody] JsonPatchDocument<User> patchDocument)
         {
             var entity = _context.Users.FirstOrDefault(user => user.UserID == id);
 
@@ -128,7 +128,8 @@ namespace KickerAPI.Controllers
             }
 
             patchDocument.ApplyTo(entity);
-            return Ok(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
         // DELETE: api/Users/{id}
