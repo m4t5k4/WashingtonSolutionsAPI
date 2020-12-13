@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using KickerAPI.Data;
 using KickerAPI.Models;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace KickerAPI.Controllers
 {
@@ -112,6 +113,21 @@ namespace KickerAPI.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetGame", new { id = game.GameID }, game);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<Game>> Patch(int id, [FromBody] JsonPatchDocument<Game> patchDocument)
+        {
+            var entity = _context.Games.FirstOrDefault(game => game.GameID == id);
+
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            patchDocument.ApplyTo(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
         // DELETE: api/Games/5
