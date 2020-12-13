@@ -92,6 +92,14 @@ namespace KickerAPI.Controllers
             return CreatedAtAction("GetTeam", new { id = team.TeamID }, team);
         }
 
+        [HttpPost("teamuser")]
+        public async Task<ActionResult<TeamUser>> PostTeamUser(TeamUser teamUser)
+        {
+            _context.TeamUsers.Add(teamUser);
+            await _context.SaveChangesAsync();
+            return teamUser;
+        }
+
         // DELETE: api/Teams/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Team>> DeleteTeam(int id)
