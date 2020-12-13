@@ -62,6 +62,18 @@ namespace KickerAPI.Controllers
             return user;
         }
 
+        [Authorize]
+        [HttpGet("WithoutGroup")]
+        public async Task<ActionResult<IEnumerable<User>>> GetWithoutGroup()
+        {
+            var user = await _context.Users.Where(g => g.GroupID == null).ToListAsync();
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return user;
+        }
+
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {

@@ -42,6 +42,12 @@ namespace KickerAPI.Controllers
             return team;
         }
 
+        [HttpGet("ByGroup/{id}")]
+        public async Task<ActionResult<IEnumerable<Team>>> GetTeamsByGroupID(int id)
+        {
+            return await _context.Teams.Where(t => t.GroupID == id).Include(t => t.TeamUsers).ToListAsync();
+        }
+
         // PUT: api/Teams/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
