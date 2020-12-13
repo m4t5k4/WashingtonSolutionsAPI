@@ -97,8 +97,8 @@ namespace KickerAPI.Data
             context.Tournaments.Add(tournament1);
             context.SaveChanges();
 
-            var game1 = new Game { TeamA = team1, TeamB = team2, Table = table1, GameType = gameType1, Tournament = tournament1, ChallengedBy = group1, ChallengedGroup = group2, GameStatus = gameStatus2 };
-            var game2 = new Game { TeamA = team2, TeamB = team1, Table = table1, GameType = gameType2, Tournament = tournament1, ScoreTeamA = 1, ScoreTeamB = 2, ChallengedBy = group2, ChallengedGroup = group1, GameStatus = gameStatus5 };
+            var game1 = new Game { TeamA = team1, TeamB = team2, Table = table1, GameType = gameType1, Tournament = tournament1, ChallengedBy = team1, ChallengedGroup = team2, GameStatus = gameStatus2 };
+            var game2 = new Game { TeamA = team2, TeamB = team1, Table = table1, GameType = gameType2, Tournament = tournament1, ScoreTeamA = 1, ScoreTeamB = 2, ChallengedBy = team2, ChallengedGroup = team1, GameStatus = gameStatus5 };
             context.Games.AddRange(game1, game2);
             context.SaveChanges();
 
