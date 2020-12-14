@@ -44,7 +44,13 @@ namespace KickerAPI.Data
             context.SaveChanges();
 
             var pic1 = new File { Name = "Morty Smith", Path = "Morty_Smith.jpg" };
-            context.Files.Add(pic1);
+            var tablePic1 = new File { Name = "tafel1", Path = "uploads/tafel1.png" };
+            var tablePic2 = new File { Name = "tafel2", Path = "uploads/tafel2.jpg" };
+            var userPic1 = new File { Name = "martha-grant", Path = "uploads/martha-grant.jpg" };
+            var userPic2 = new File { Name = "franklin-day", Path = "uploads/franklin-day" };
+            var userPic3 = new File { Name = "alberto-garrett", Path = "uploads/alberto-garrett.jpg" };
+            var userPic4 = new File { Name = "tracey-bell", Path = "uploads/tracey-bell" };
+            context.Files.AddRange(pic1,tablePic1,tablePic2,userPic1,userPic2,userPic3,userPic4);
             context.SaveChanges();
 
             var group1 = new Group { Name = "Thomas More Kicker Team", CompanyName = "Thomas More", Location = "Geel", GroupPicture = pic1 };
@@ -53,10 +59,10 @@ namespace KickerAPI.Data
             context.SaveChanges();
 
             var user1 = new User { Role = adminRole, Username = "admin", Password = BC.HashPassword("admin123"), FirstName = "admin", LastName = "Istrator", Email = "admin.istrator@thomasmore.be", Group = group1, UserPicture = pic1 };
-            var user2 = new User { Role = userRole, Username = "user1", Password = BC.HashPassword("user123"), FirstName = "User1", LastName = "Test", Email = "user1.test@thomasmore.be", Group = group1, UserPicture = pic1 };
-            var user3 = new User { Role = userRole, Username = "user2", Password = BC.HashPassword("user123"), FirstName = "User2", LastName = "Test", Email = "user2.test@thomasmore.be", Group = group2, UserPicture = pic1 };
-            var user4 = new User { Role = captainRole, Username = "captain1", Password = BC.HashPassword("captian123"), FirstName = "captain1", LastName = "Test", Email = "captain1.test@thomasmore.be", Group = group1, UserPicture = pic1 };
-            var user5 = new User { Role = captainRole, Username = "captain2", Password = BC.HashPassword("captian123"), FirstName = "captain2", LastName = "Test", Email = "captain2.test@thomasmore.be", Group = group2, UserPicture = pic1 };
+            var user2 = new User { Role = userRole, Username = "user1", Password = BC.HashPassword("user123"), FirstName = "Martha", LastName = "Grant", Email = "user1.test@thomasmore.be", Group = group1, UserPicture = userPic1 };
+            var user3 = new User { Role = userRole, Username = "user2", Password = BC.HashPassword("user123"), FirstName = "Franklin", LastName = "Day", Email = "user2.test@thomasmore.be", Group = group2, UserPicture = userPic2 };
+            var user4 = new User { Role = captainRole, Username = "captain1", Password = BC.HashPassword("captian123"), FirstName = "Alberto", LastName = "Garrett", Email = "captain1.test@thomasmore.be", Group = group1, UserPicture = userPic3 };
+            var user5 = new User { Role = captainRole, Username = "captain2", Password = BC.HashPassword("captian123"), FirstName = "Tracey", LastName = "Bell", Email = "captain2.test@thomasmore.be", Group = group2, UserPicture = userPic4 };
             context.Users.AddRange(user1, user2, user3, user4, user5);
             context.SaveChanges();
 
@@ -84,8 +90,8 @@ namespace KickerAPI.Data
             user5.TeamUsers.Add(teamUser4);
             context.SaveChanges();
 
-            var table1 = new Table { TableName = "TM Table 1", CompanyName = "Thomas More", ContactPerson = user1, Address = "Geel", TablePicture = pic1 };
-            var table2 = new Table { TableName = "UCLL Table 1", CompanyName = "UCLL", ContactPerson = user1, Address = "Hasselt", TablePicture = pic1 };
+            var table1 = new Table { TableName = "TM Table 1", CompanyName = "Thomas More", ContactPerson = user1, Address = "Geel", TablePicture = tablePic1 };
+            var table2 = new Table { TableName = "UCLL Table 1", CompanyName = "UCLL", ContactPerson = user1, Address = "Hasselt", TablePicture = tablePic2 };
             context.Table.AddRange(table1, table2);
             context.SaveChanges();
 
